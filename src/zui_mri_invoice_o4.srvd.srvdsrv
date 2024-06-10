@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for ZC_MRI_INVOICE'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZC_MRI_INVOICE'
+  }
+}
+define service ZUI_MRI_INVOICE_O4 provider contracts odata_v4_ui {
+  expose ZC_MRI_INVOICE;
+}

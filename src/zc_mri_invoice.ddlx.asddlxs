@@ -1,0 +1,50 @@
+@Metadata.layer: #CORE
+@UI: { headerInfo: {
+typeName: 'Invoice',
+typeNamePlural: 'Invoices',
+title: { type: #STANDARD, value: 'Invoice' },
+         description: { type: #STANDARD, value: 'Invoice' } },
+         presentationVariant: [{
+         sortOrder: [{ by: 'Invoice', direction: #ASC }],
+         visualizations: [{type: #AS_LINEITEM}] }] }
+annotate view ZC_MRI_INVOICE with
+{
+  @UI.facet: [    {
+                label: 'General Information',
+                id: 'GeneralInfo',
+                type: #COLLECTION,
+                position: 10
+                },
+                     { id:            'Invoicedet',
+                    purpose:       #STANDARD,
+                    type:          #IDENTIFICATION_REFERENCE,
+                    label:         'Invoice Details',
+                    parentId: 'GeneralInfo',
+                    position:      10 } ]
+
+  @UI: { lineItem:       [ { position: 10, importance: #HIGH , label: 'Invoice Number'} ] ,
+          identification: [ { position: 10 , label: 'Invoice Number' } ] }
+  Invoice;
+  @UI: { lineItem:       [ { position: 20, importance: #HIGH , label: 'Purchase Order'} ] ,
+           identification: [ { position: 20 , label: 'Purchase Order Number' } ] }
+  PurchaseOrder;
+  @UI: { lineItem:       [ { position: 20, importance: #HIGH , label: 'Price'} ] ,
+           identification: [ { position: 20 , label: 'Price' } ] }
+  Price;
+  @UI: { lineItem:       [ { position: 20, importance: #HIGH , label: 'Comments'} ] ,
+           identification: [ { position: 20 , label: 'Comments' } ] }
+  Comments;
+  @UI:
+  { lineItem:       [ { position: 30, importance: #HIGH , label: 'Attachment'}, { type: #FOR_ACTION, dataAction: 'createMSWordInvoice' , label: 'Create Invoice' } ], 
+    identification: [ { position: 20 , label: 'Attachment' }] 
+  }
+  Attachment;
+
+  @UI.hidden: true
+  MimeType;
+
+  @UI.hidden: true
+  Filename;
+
+
+}
